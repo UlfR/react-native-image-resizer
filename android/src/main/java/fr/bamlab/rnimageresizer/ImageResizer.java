@@ -223,6 +223,7 @@ class ImageResizer {
         Bitmap scaledImage = ImageResizer.resizeImage(sourceImage, newWidth, newHeight);
         if (sourceImage != scaledImage) {
             sourceImage.recycle();
+	    sourceImage = null;
         }
 
         // Rotate if necessary
@@ -233,6 +234,7 @@ class ImageResizer {
 
         if (scaledImage != rotatedImage) {
             scaledImage.recycle();
+	    scaledImage = null;
         }
 
         // Save the resulting image
@@ -246,6 +248,7 @@ class ImageResizer {
 
         // Clean up remaining image
         rotatedImage.recycle();
+	rotatedImage = null;
 
         return resizedImagePath;
     }

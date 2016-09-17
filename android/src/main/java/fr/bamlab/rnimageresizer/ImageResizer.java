@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Provide methods to resize and rotate an image file.
@@ -241,7 +242,7 @@ class ImageResizer {
         }
 
         String resizedImagePath = ImageResizer.saveImage(rotatedImage, path,
-                Long.toString(new Date().getTime()), compressFormat, quality);
+                "image-" + UUID.randomUUID().toString(), compressFormat, quality);
 
         // Clean up remaining image
         rotatedImage.recycle();

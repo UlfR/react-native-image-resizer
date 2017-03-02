@@ -6,17 +6,22 @@ A React Native module that can create scaled versions of local images (also supp
 
 Install the package:
 
-React-Native 0.29.2+
-
+* 😻 React Native >= 0.40
 ```
 npm install --save react-native-image-resizer
 react-native link react-native-image-resizer
 ```
 
-React-Native < 0.29.2
+* 👨 React Native >= 0.29.2 and < 0.40
+```
+npm install --save react-native-image-resizer@0.0.12
+react-native link react-native-image-resizer
+```
+
+* 👴 React Native >= 0.28 and < 0.29.2
 ```
 npm install rnpm -g
-rnpm install react-native-image-resizer
+rnpm install react-native-image-resizer@0.0.12
 ```
 
 ### Android
@@ -44,11 +49,13 @@ A basic, sample app is available in [the `example` folder](https://github.com/ba
 
 ### `promise createResizedImage(path, maxWidth, maxHeight, compressFormat, quality, rotation = 0, outputPath)`
 
-The promise resolves with a string containing the uri of the new file.
+The promise resolves with a string containing the URI of the new file. This URI can be used directly as the `source` of an [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component.
+
+> :warning: On Android, `file:` will be prepended to the returned string. This allows it to be displayed as an image, but it also means you [won't be able to access the file directly](https://github.com/bamlab/react-native-image-resizer/issues/50) when using a utility like `fs`. To do so, you can simply use `rawPath = originalPath.replace('file:', '')` to get the raw path.
 
 Option | Description
 ------ | -----------
-path | Path of image file, or a base64 encoded image string prefixed with 'data:image/<imagetype>' where <imagetype> is jpeg or png.
+path | Path of image file, or a base64 encoded image string prefixed with 'data:image/imagetype' where `imagetype` is jpeg or png.
 maxWidth | Image max width (ratio is preserved)
 maxHeight | Image max height (ratio is preserved)
 compressFormat | Can be either JPEG, PNG or WEBP (android only).
